@@ -4,6 +4,6 @@ data "external" "account" {
     local.cmd,
     "get",
     "--filter=name=${var.name}",
-    "--token ${var.spotinst_token}"
+    "--token=${var.spotinst_token}"
   ]
 }
