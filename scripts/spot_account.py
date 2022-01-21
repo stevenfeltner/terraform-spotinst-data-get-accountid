@@ -1,20 +1,13 @@
 import click
 import json
-import requests
-import base64
-import re
-import os
 
 from spotinst_sdk2 import SpotinstSession
 
-token_val = os.environ.get('SPOTINST_TOKEN')
 
 @click.group()
 @click.pass_context
 def cli(ctx, *args, **kwargs):
     ctx.obj = {}
-    session = SpotinstSession()
-    ctx.obj['client'] = session.client("admin")
 
 
 @cli.command()
@@ -28,10 +21,16 @@ def cli(ctx, *args, **kwargs):
     required=False,
     help='Return only the raw value of a single attribute'
 )
+@click.option(
+    '--token',
+    required=False,
+    help='Spotinst Token'
+)
 @click.pass_context
 def get(ctx, *args, **kwargs):
     """Returns ONLY the first match"""
-    ctx.obj['client'].account_id = kwargs.get('account_id')
+    session = SpotinstSession(auth_token=kwargs.get('token'))
+    ctx.obj['client'] = session.client("admin")
     result = ctx.obj['client'].get_accounts()
     if kwargs.get('filter'):
         k, v = kwargs.get('filter').split('=')

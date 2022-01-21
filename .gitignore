@@ -14,3 +14,4 @@ terraform.tfvars
 # jetbrains
 .idea
 /.terraform.lock.hcl
+/test/*

@@ -1,40 +1,22 @@
-# [NAME] Terraform Module
+# Data-get-accountid
 
-Short description of the module.
-
-## Table of Contents
-
-- [Prerequisites](#prerequisites)
-- [Usage](#usage)
-- [Examples](#examples)
-- [Requirements](#requirements)
-- [Providers](#providers)
-- [Modules](#modules)
-- [Resources](#resources)
-- [Inputs](#inputs)
-- [Outputs](#outputs)
-- [Documentation](#documentation)
-- [Getting Help](#getting-help)
-- [Community](#community)
-- [Contributing](#contributing)
-- [License](#license)
+Module to call Spot API to retrieve the account ID
 
 ## Usage
 
 ```hcl
-module "[NAME]" {
-  source = "spotinst/[NAME]/spotinst"
+module "data-get-accountid" {
+  source  = "stevenfeltner/data-get-accountid/spotinst"
+  version = "0.1.0"
+  name = "Sample Account"
+  spotinst_token = "Redacted"
+}
 
-  ...
+output "spotinst_account" {
+  description = "Spot account ID"
+  value       = module.data-get-accountid.spotinst_account
 }
 ```
-
-## Examples
-
-- [Basic](examples/basic)
-
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Documentation
 

@@ -3,6 +3,7 @@ data "external" "account" {
   program = [
     local.cmd,
     "get",
-    "--filter=name=${var.name}"
+    "--filter=name=${var.name}",
+    "--token ${var.spotinst_token}"
   ]
 }
