@@ -15,6 +15,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        spot-account=spot_account:cli
+        spot-account-id=spot_account_id:cli
     ''',
 )
