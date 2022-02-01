@@ -15,3 +15,5 @@ terraform.tfvars
 .idea
 /.terraform.lock.hcl
 /test/*
+scripts/spot.egg-info/
+scripts/__pycache__/

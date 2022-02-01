@@ -1,4 +1,4 @@
-# Retrieve the Spot Account ID Information
+# Retrieve the Spot Account ID
 data "external" "account" {
   program = [
     local.cmd,

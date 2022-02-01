@@ -37,11 +37,20 @@ def get(ctx, *args, **kwargs):
         result = [x for x in result if x[k] == v]
     if kwargs.get('attr'):
         if result:
-            result = result[0].get(kwargs.get('attr'))
-            click.echo(result)
+            if result[0].get(kwargs.get('attr')):
+                click.echo(result[0].get(kwargs.get('attr')))
+            else:
+                fail_string = {'account_id': ''}
+                click.echo(json.dumps(fail_string))
+        else:
+            fail_string = {'account_id': ''}
+            click.echo(json.dumps(fail_string))
     else:
         if result:
             click.echo(json.dumps(result[0]))
+        else:
+            fail_string = {'account_id': ''}
+            click.echo(json.dumps(fail_string))
 
 
 if __name__ == "__main__":
