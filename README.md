@@ -12,9 +12,9 @@ module "data-get-accountid" {
   spotinst_token = "Redacted"
 }
 
-output "spotinst_account" {
+output "spotinst_account_id" {
   description = "Spot account ID"
-  value       = module.data-get-accountid.spotinst_account
+  value       = module.data-get-accountid.spotinst_account_id
 }
 ```
 

@@ -17,11 +17,6 @@ def cli(ctx, *args, **kwargs):
     help='Return matching records. Syntax: key=value'
 )
 @click.option(
-    '--attr',
-    required=False,
-    help='Return only the raw value of a single attribute'
-)
-@click.option(
     '--token',
     required=False,
     help='Spotinst Token'
@@ -32,25 +27,13 @@ def get(ctx, *args, **kwargs):
     session = SpotinstSession(auth_token=kwargs.get('token'))
     ctx.obj['client'] = session.client("admin")
     result = ctx.obj['client'].get_accounts()
-    if kwargs.get('filter'):
-        k, v = kwargs.get('filter').split('=')
-        result = [x for x in result if x[k] == v]
-    if kwargs.get('attr'):
-        if result:
-            if result[0].get(kwargs.get('attr')):
-                click.echo(result[0].get(kwargs.get('attr')))
-            else:
-                fail_string = {'account_id': '', 'organization_id': ''}
-                click.echo(json.dumps(fail_string))
-        else:
-            fail_string = {'account_id': '', 'organization_id': ''}
-            click.echo(json.dumps(fail_string))
+    k, v = kwargs.get('filter').split('=')
+    result = [x for x in result if x[k] == v]
+    if result:
+        click.echo(json.dumps(result[0]))
     else:
-        if result:
-            click.echo(json.dumps(result[0]))
-        else:
-            fail_string = {'account_id': '', 'organization_id': ''}
-            click.echo(json.dumps(fail_string))
+        fail_string = {'account_id': '', 'organization_id': ''}
+        click.echo(json.dumps(fail_string))
 
 
 if __name__ == "__main__":
